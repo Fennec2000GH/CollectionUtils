@@ -1,35 +1,35 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.List;
 
 public abstract class BeadSort {
     //MEMBER FUNCTIONS
     //ACCESSORS
     public static String getTimeComplexity(){ return "n"; }
 
-    public static String getSpaceComplexity(){ return "log(n)"; }
+    public static String getSpaceComplexity(){ return "log(n^2)"; }
 
     public static String getSortClass(){ return "Other"; }
 
     //MUTATORS
-    public static Collection<Number> sorted(Collection<Number> arr){
+    public static List<Integer> sorted(List<Integer> arr){
         if(arr == null)
             return null;
-        Number maximum = Collections.max(arr.stream().mapToDouble(Number::doubleValue).boxed().collect(Collectors.toList()));
-        int[] digitCount = new int[(int)Math.log10(maximum.doubleValue())];
+        List<Integer> output = new ArrayList<>();
+        int maximum = Collections.max(arr), minimum = Collections.min(arr);
+        int span = maximum - minimum + 1;
+        int[] digitCount = new int[span];
         Arrays.fill(digitCount, 0);
-        for(Number el : arr)
-            for(int digitIndex = 0; digitIndex <= (int)Math.log10(el.doubleValue()); digitIndex++)
+        for(int el : arr)
+            for(int digitIndex = 0; digitIndex <= el - minimum; digitIndex++)
                 ++digitCount[digitIndex];
-        Collection<Number> output = new ArrayList<>();
-        for(int digitIndex = 0; digitIndex <= digitCount.length - 2; digitIndex++)
-            output.add(digitCount[digitIndex] - digitCount[digitIndex + 1]);
-        output.add(digitCount[digitCount.length - 1]);
+        for(int i = 0; i <= span - 2; i++)
+            output.addAll(Collections.nCopies(digitCount[i] - digitCount[i + 1], i + minimum));
+        output.addAll(Collections.nCopies(digitCount[span - 1], maximum));
         return output;
     }
 
-    public static Collection<Number> sorted(Number[] arr){ return BeadSort.sorted(Arrays.asList(arr)); }
+    public static List<Integer> sorted(Integer[] arr){ return BeadSort.sorted(Arrays.asList(arr)); }
 
 }
