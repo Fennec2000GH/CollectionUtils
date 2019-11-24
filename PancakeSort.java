@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public abstract class PancakeSort {
     public static String getSortClass(){ return "Other"; }
 
     //MUTATORS
-    public static Collection<Number> sorted(Collection<Number> arr){
+    public static List<Number> sorted(List<Number> arr){
         if(arr == null)
             return null;
         List<Number> output = new ArrayList<>(arr);
@@ -31,5 +30,5 @@ public abstract class PancakeSort {
         return output;
     }
 
-    public static Collection<Number> sorted(Number[] arr){ return PancakeSort.sorted(Arrays.asList(arr)); }
+    public static List<Number> sorted(Number[] arr){ return PancakeSort.sorted(Arrays.asList(arr)); }
 }
