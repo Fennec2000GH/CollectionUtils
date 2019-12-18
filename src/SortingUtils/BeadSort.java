@@ -1,3 +1,6 @@
+package CollectionUtils.SortingUtils;
+
+import CollectionUtils.base.CLASS;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,3 +39,6 @@ public abstract class BeadSort {
     public static List<Integer> sorted(Integer[] arr){ return BeadSort.sorted(Arrays.asList(arr)); }
 
 }
+
+
+

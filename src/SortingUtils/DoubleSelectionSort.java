@@ -1,3 +1,6 @@
+package CollectionUtils.SortingUtils;
+
+import CollectionUtils.base.CLASS;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,11 +14,11 @@ public abstract class DoubleSelectionSort {
     public final static CLASS sortClass = CLASS.OTHER;
 
     //MEMBER FUNCTIONS
-    public static String getTimeComplexity(){ return PancakeSort.timeComplexity; }
+    public static String getTimeComplexity(){ return DoubleSelectionSort.timeComplexity; }
 
-    public static String getSpaceComplexity(){ return PancakeSort.spaceComplexity; }
+    public static String getSpaceComplexity(){ return DoubleSelectionSort.spaceComplexity; }
 
-    public static CLASS getSortClass(){ return PancakeSort.sortClass; }
+    public static CLASS getSortClass(){ return DoubleSelectionSort.sortClass; }
 
     public static List<Number> sorted(List<Number> arr){
         List<Number> output = new ArrayList<>(arr);

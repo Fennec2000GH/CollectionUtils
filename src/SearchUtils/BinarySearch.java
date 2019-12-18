@@ -1,3 +1,6 @@
+package CollectionUtils.SearchUtils;
+
+import CollectionUtils.base.CLASS;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,11 +11,11 @@ public class BinarySearch {
     public final static CLASS searchClass = CLASS.BINARY;
 
     //MEMBER FUNCTIONS
-    public static String getTimeComplexity(){ return InterpolationSearch.timeComplexity; }
+    public static String getTimeComplexity(){ return BinarySearch.timeComplexity; }
 
-    public static String getSpaceComplexity(){ return InterpolationSearch.spaceComplexity; }
+    public static String getSpaceComplexity(){ return BinarySearch.spaceComplexity; }
 
-    public static CLASS getSearchClass(){ return InterpolationSearch.searchClass; }
+    public static CLASS getSearchClass(){ return BinarySearch.searchClass; }
 
     public static int search(List<Number> arr, Number key){
         int a = 0, b = arr.size(), mid = 0;
