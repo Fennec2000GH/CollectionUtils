@@ -19,6 +19,15 @@ Double Selection Sort ✔️
 
 Self Organizing List ✔️
 
+Finished Data Structures 
+------------------------
+Implementations of pre-existing and several self-developed data structures. 
+
+HashForest ✔️
+
+UniformSelfOrganizingList - in progress 
+
+
 To Do List 
 ----------- 
 Gnome Sort 
