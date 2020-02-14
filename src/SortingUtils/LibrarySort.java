@@ -16,11 +16,11 @@ public class LibrarySort {
 
     public static CLASS getSortClass(){ return LibrarySort.sortClass; }
 
-    public static List<Number> sorted(List<Number> arr){
+//    public static List<Number> sorted(List<Number> arr){
+//
+//
+//    }
 
-
-    }
-
-    public static List<Number> sorted(Number[] arr){ }
+//    public static List<Number> sorted(Number[] arr){ }
 
 }

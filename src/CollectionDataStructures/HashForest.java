@@ -1,5 +1,6 @@
 package CollectionUtils.CollectionDataStructures;
 
+//STANDARD JAVA
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,15 +10,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+
+//GOOGLE GUAVA
 import com.google.common.base.Preconditions;
 
-enum TYPE {SET, MULTISET, LIMITED_MULTISET}
 
-/**
+/** Hash table backed by array of <code>TreeMap</code>
  * @param <T> Data type of data
  */
 public class HashForest<T> {
     //MEMBER VARIABLES
+    public enum TYPE {SET, MULTISET, LIMITED_MULTISET}
+
     /** Hash structure using 2D array with space-saving techniques
      */
     private TreeMap<T, Integer>[] hashForest;
@@ -41,22 +45,36 @@ public class HashForest<T> {
 
     //MEMBER FUNCTIONS
     //CONSTRUCTORS
+    /** Default constructor (unconventional) to be used in case other constructors throw exceptions
+     */
+    public HashForest(){
+        this.hashForest = new TreeMap[10];
+        for(int i = 0; i < this.getMaximumHashValue(); i++)
+            this.hashForest[i] = new TreeMap<>();
+        this.hashFunction = n -> (Integer)n;
+        this.type = TYPE.SET;
+        this.treeCapacity = -1;
+    }
+
     /** Constructor applies custom <code>hashFunction</code> and creates new <code>hashForest</code>
      * @param hashFunc New custom hash function
      * @param hashValueRange Countable integer range from 0 to a positive number that denotes hash values employed
      */
     public HashForest(Function<T, Integer> hashFunc, int hashValueRange){
+        //default constructor is always called in case an exception is thrown and stops current constructor
+        this();
         try {
             Preconditions.checkNotNull(hashFunc, "Hash function must exist!");
-            Preconditions.checkArgument(hashValueRange > 0,
+            Preconditions.checkArgument(hashValueRange >= 1,
                     "Number of possible hash values must be positive!");
-        } catch (IllegalArgumentException | NullPointerException e) {
+        } catch (NullPointerException | IllegalArgumentException e) {
             e.printStackTrace();
         }
-        this.hashForest = new TreeMap[hashValueRange];
+        this.hashForest = new TreeMap[hashValueRange <= 0 ? 10 : hashValueRange];
         for(int i = 0; i < this.getMaximumHashValue(); i++)
             this.hashForest[i] = new TreeMap<>();
-        this.hashFunction = hashFunc;
+        this.hashFunction = hashFunc == null ? n -> (Integer)n % 10 : hashFunc;
+        this.type = TYPE.SET;
         this.treeCapacity = -1;
     }
 
@@ -68,7 +86,12 @@ public class HashForest<T> {
      */
     public HashForest(Function<T, Integer> hashFunc, int hashValueRange, TYPE newType){
         this(hashFunc, hashValueRange);
-        this.type = newType;
+        try {
+            Preconditions.checkNotNull(newType, "TYPE cannot be null!");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        this.type = newType == null ? TYPE.SET : newType;
     }
 
     /** Constructor applies custom <code>hashFunction</code>, sets type of set to be modeled after, sets new capacity
@@ -111,6 +134,11 @@ public class HashForest<T> {
         int hashValue = Math.abs(this.hashFunction.apply(el)) % (this.getMaximumHashValue() + 1);
         return this.hashForest[hashValue].get(el);
     }
+
+    /** Finds currently used hash function
+     * @return Hash function of type <code>Function<T, Integer></code>
+     */
+    public Function<T, Integer> getHashFunction() { return this.hashFunction; }
 
     /** Finds currently set capacity on number of distinct elements allowed per chain sequence
      * @return Current chain sequence capacity
@@ -276,6 +304,4 @@ public class HashForest<T> {
     }
 
 }
-
-
 

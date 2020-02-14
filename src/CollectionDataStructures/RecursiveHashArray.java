@@ -34,7 +34,7 @@ class RecursiveHashArray <T> {
     private T data;
 
     //MEMBER FUNCTIONS
-    //CONSTRUCTORS 
+    //CONSTRUCTORS
     /** Constructor builds new recursive hash array with given dimensions and length of each dimension used
      * @param newShape <code>int</code> array denoting how many next-dimension hash arrays, or if terminal, how many
      *                 elements can be stored with the current dimension's hash array
